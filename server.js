@@ -22,7 +22,7 @@ app.use(session({
 }));
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log("✅ MongoDB Connected"))
     .catch(err => console.log("❌ MongoDB Error:", err));
 
@@ -90,5 +90,8 @@ app.get("/logout", (req, res) => {
     res.redirect("/");
 });
 
-// Start Server
-app.listen(3000, () => console.log("🚀 Server running on http://localhost:3000"));
+// ------------------- Start Server (IMPORTANT for Render) -------------------
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`🚀 Server running on port ${PORT}`);
+});
